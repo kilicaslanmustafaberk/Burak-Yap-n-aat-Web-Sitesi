@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
     <title>Burak Yapı & İnşaat</title>
     <link rel="shortcut icon" href="pnglogo.png" />
 
@@ -34,7 +34,7 @@
             --text-main: #ccd6f6;
             --text-sub: #8892b0;
             --white: #ffffff;
-            --glass: rgba(10, 25, 47, 0.7);
+            --glass: rgba(10, 25, 47, 0.85);
             --gold-gradient: linear-gradient(135deg, #ffb400 0%, #f39c12 100%);
             --navy-gradient: linear-gradient(135deg, #0a192f 0%, #112240 100%);
             --transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
@@ -60,7 +60,7 @@
 
         /* --- Custom Scrollbar --- */
         ::-webkit-scrollbar {
-            width: 8px;
+            width: 6px;
         }
 
         ::-webkit-scrollbar-track {
@@ -72,7 +72,9 @@
             border-radius: 10px;
         }
 
-        /* --- Header & Navigation --- */
+        /* ========================
+           HEADER & NAVIGATION
+        ======================== */
         header {
             position: fixed;
             top: 0;
@@ -89,6 +91,7 @@
             padding: 15px 8%;
             background: var(--glass);
             backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border-bottom: 1px solid rgba(255, 180, 0, 0.2);
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
         }
@@ -96,12 +99,12 @@
         .logo-container {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 12px;
             text-decoration: none;
         }
 
         .logo-img {
-            height: 55px;
+            height: 48px;
             width: auto;
             transition: var(--transition);
         }
@@ -109,7 +112,7 @@
         .logo-text {
             color: var(--white);
             font-family: 'Syncopate', sans-serif;
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             font-weight: 700;
             letter-spacing: 5px;
             display: flex;
@@ -119,7 +122,7 @@
 
         .logo-text span {
             color: var(--secondary);
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             letter-spacing: 8px;
             margin-top: 5px;
             font-weight: 400;
@@ -127,17 +130,18 @@
         }
 
         header.scrolled .logo-text {
-            font-size: 1.3rem;
+            font-size: 1.2rem;
         }
 
         header.scrolled .logo-text span {
-            font-size: 0.8rem;
+            font-size: 0.7rem;
         }
 
+        /* --- Desktop Nav --- */
         nav ul {
             display: flex;
             list-style: none;
-            gap: 45px;
+            gap: 40px;
         }
 
         nav a {
@@ -170,19 +174,148 @@
             width: 100%;
         }
 
-        /* --- Hero Section --- */
-        .hero {
+        /* --- Hamburger Menu --- */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 5px;
+            z-index: 1100;
+            background: none;
+            border: none;
+            outline: none;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 26px;
+            height: 2px;
+            background: var(--white);
+            border-radius: 2px;
+            transition: all 0.4s ease;
+        }
+
+        .hamburger.open span:nth-child(1) {
+            transform: translateY(7px) rotate(45deg);
+        }
+
+        .hamburger.open span:nth-child(2) {
+            opacity: 0;
+            transform: scaleX(0);
+        }
+
+        .hamburger.open span:nth-child(3) {
+            transform: translateY(-7px) rotate(-45deg);
+        }
+
+        /* --- Mobile Nav Drawer --- */
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 80%;
+            max-width: 320px;
             height: 100vh;
-            background: linear-gradient(rgba(10, 25, 47, 0.6), rgba(10, 25, 47, 0.85)),
-                url('background.png');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
+            background: var(--primary);
+            border-left: 1px solid rgba(255, 180, 0, 0.2);
+            z-index: 1050;
+            transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            padding: 100px 40px 40px;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .mobile-nav.open {
+            right: 0;
+        }
+
+        .mobile-nav ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .mobile-nav ul li {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .mobile-nav ul li a {
+            display: block;
+            padding: 18px 0;
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            transition: var(--transition);
+        }
+
+        .mobile-nav ul li a:hover {
+            color: var(--secondary);
+            padding-left: 10px;
+        }
+
+        .mobile-nav-cta {
+            margin-top: 40px;
+        }
+
+        .mobile-nav-cta a {
             display: flex;
             align-items: center;
-            padding: 0 10%;
+            justify-content: center;
+            gap: 12px;
+            padding: 18px;
+            background: var(--gold-gradient);
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 800;
+            border-radius: 6px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.9rem;
+        }
+
+        .nav-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1040;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .nav-overlay.open {
+            opacity: 1;
+        }
+
+        /* ========================
+           HERO SECTION
+        ======================== */
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(rgba(10, 25, 47, 0.6), rgba(10, 25, 47, 0.88)),
+                url('background.png');
+            background-size: cover;
+            background-position: center top;
+            /* iOS fix: no fixed attachment */
+            background-attachment: scroll;
+            display: flex;
+            align-items: center;
+            padding: 120px 10% 80px;
             position: relative;
             overflow: hidden;
+        }
+
+        /* Parallax only on desktop */
+        @media (min-width: 1025px) {
+            .hero {
+                background-attachment: fixed;
+            }
         }
 
         .hero::before {
@@ -190,6 +323,8 @@
             position: absolute;
             width: 100%;
             height: 100%;
+            top: 0;
+            left: 0;
             background: radial-gradient(circle at center, transparent 0%, var(--primary) 100%);
             opacity: 0.4;
         }
@@ -197,44 +332,45 @@
         .hero-content {
             position: relative;
             z-index: 2;
-            max-width: 900px;
+            max-width: 860px;
         }
 
-        .hero span {
+        .hero-eyebrow {
             color: var(--secondary);
             font-weight: 800;
             letter-spacing: 5px;
             text-transform: uppercase;
             display: block;
             margin-bottom: 20px;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
         }
 
         .hero h1 {
             color: var(--white);
-            font-size: clamp(3rem, 7vw, 6rem);
+            font-size: clamp(2.4rem, 6vw, 5.5rem);
             font-weight: 800;
-            line-height: 1;
-            margin-bottom: 30px;
+            line-height: 1.05;
+            margin-bottom: 28px;
             text-transform: uppercase;
-            letter-spacing: -2px;
+            letter-spacing: -1px;
         }
 
         .hero p {
             color: var(--text-main);
-            font-size: 1.25rem;
-            max-width: 600px;
-            margin-bottom: 45px;
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
+            max-width: 580px;
+            margin-bottom: 42px;
             font-weight: 300;
         }
 
         .cta-group {
             display: flex;
-            gap: 25px;
+            gap: 18px;
+            flex-wrap: wrap;
         }
 
         .btn-premium {
-            padding: 22px 45px;
+            padding: 18px 38px;
             border-radius: 4px;
             font-weight: 800;
             text-transform: uppercase;
@@ -243,14 +379,15 @@
             transition: var(--transition);
             display: inline-flex;
             align-items: center;
-            gap: 15px;
-            font-size: 0.9rem;
+            gap: 12px;
+            font-size: 0.85rem;
+            white-space: nowrap;
         }
 
         .btn-gold {
             background: var(--gold-gradient);
             color: var(--primary);
-            box-shadow: 0 15px 35px rgba(255, 180, 0, 0.3);
+            box-shadow: 0 12px 30px rgba(255, 180, 0, 0.3);
         }
 
         .btn-outline {
@@ -259,8 +396,8 @@
         }
 
         .btn-premium:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            transform: translateY(-8px);
+            box-shadow: 0 18px 40px rgba(0, 0, 0, 0.4);
         }
 
         .btn-gold:hover {
@@ -272,23 +409,25 @@
             color: var(--primary);
         }
 
-        /* --- Stats Floating --- */
+        /* ========================
+           STATS STRIP
+        ======================== */
         .stats-strip {
             background: var(--primary);
-            padding: 60px 10%;
+            padding: 55px 10%;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
             position: relative;
             z-index: 5;
-            margin-top: -50px;
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
         }
 
         .stat-card {
             text-align: center;
             color: var(--white);
             border-right: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 10px 0;
         }
 
         .stat-card:last-child {
@@ -296,32 +435,34 @@
         }
 
         .stat-card h3 {
-            font-size: 3rem;
+            font-size: clamp(2rem, 4vw, 3rem);
             color: var(--secondary);
             font-weight: 800;
-            margin-bottom: 5px;
+            margin-bottom: 6px;
         }
 
         .stat-card p {
-            font-size: 0.75rem;
+            font-size: 0.72rem;
             text-transform: uppercase;
             letter-spacing: 3px;
             color: var(--text-sub);
         }
 
-        /* --- Services --- */
+        /* ========================
+           SERVICES SECTION
+        ======================== */
         .services {
-            padding: 150px 10%;
+            padding: 110px 8%;
             background: #fdfdfd;
         }
 
         .section-tag {
             text-align: center;
-            margin-bottom: 80px;
+            margin-bottom: 65px;
         }
 
         .section-tag h2 {
-            font-size: 3.5rem;
+            font-size: clamp(2rem, 5vw, 3.4rem);
             font-weight: 800;
             color: var(--primary);
             text-transform: uppercase;
@@ -334,19 +475,20 @@
             text-transform: uppercase;
             letter-spacing: 5px;
             margin-bottom: 10px;
+            font-size: 0.8rem;
         }
 
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
-            gap: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
         }
 
         .service-item {
             background: var(--white);
-            padding: 80px 50px;
+            padding: 65px 40px;
             border-radius: 12px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.03);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
             transition: var(--transition);
             border: 1px solid #eee;
             position: relative;
@@ -366,7 +508,7 @@
         }
 
         .service-item:hover {
-            transform: translateY(-20px);
+            transform: translateY(-18px);
         }
 
         .service-item:hover::before {
@@ -379,9 +521,9 @@
         }
 
         .service-icon {
-            font-size: 3.5rem;
+            font-size: 3rem;
             color: var(--secondary);
-            margin-bottom: 35px;
+            margin-bottom: 28px;
             display: block;
         }
 
@@ -394,70 +536,103 @@
         }
 
         .service-item h4 {
-            font-size: 1.8rem;
-            margin-bottom: 20px;
+            font-size: 1.6rem;
+            margin-bottom: 18px;
             font-weight: 800;
         }
 
         .service-item p {
             color: #666;
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: 300;
+            line-height: 1.7;
         }
 
-        /* --- About --- */
+        /* ========================
+           ABOUT SECTION
+        ======================== */
         .about {
-            padding: 150px 10%;
+            padding: 110px 8%;
             display: flex;
             align-items: center;
-            gap: 100px;
+            gap: 80px;
             background: var(--white);
         }
 
         .about-image {
             flex: 1;
             position: relative;
+            min-width: 0;
         }
 
         .about-image img {
             width: 100%;
             border-radius: 8px;
-            box-shadow: 30px 30px 0 rgba(255, 180, 0, 1);
+            box-shadow: 25px 25px 0 rgba(255, 180, 0, 1);
+            display: block;
         }
 
         .experience-badge {
             position: absolute;
-            bottom: -40px;
-            right: -40px;
+            bottom: -30px;
+            right: -30px;
             background: var(--primary);
             color: var(--white);
-            padding: 40px;
+            padding: 30px;
             text-align: center;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
             border: 2px solid var(--secondary);
         }
 
         .about-content {
             flex: 1;
+            min-width: 0;
         }
 
         .about-content h2 {
-            font-size: 3.8rem;
+            font-size: clamp(1.8rem, 3.5vw, 3.2rem);
             font-weight: 800;
-            margin-bottom: 35px;
-            line-height: 1.1;
+            margin-bottom: 28px;
+            line-height: 1.15;
+            color: var(--primary);
         }
 
         .about-content p {
-            font-size: 1.25rem;
+            font-size: 1.05rem;
             color: #555;
-            margin-bottom: 35px;
+            margin-bottom: 28px;
             font-weight: 300;
+            line-height: 1.75;
         }
 
-        /* --- Portfolio Placeholder Grid --- */
+        .about-badges {
+            display: flex;
+            gap: 28px;
+            margin-top: 35px;
+            flex-wrap: wrap;
+        }
+
+        .about-badge-item {
+            text-align: center;
+        }
+
+        .about-badge-item i {
+            font-size: 2.3rem;
+            color: var(--secondary);
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .about-badge-item h6 {
+            font-weight: 800;
+            font-size: 0.9rem;
+        }
+
+        /* ========================
+           PORTFOLIO
+        ======================== */
         .portfolio {
-            padding: 100px 5%;
+            padding: 90px 5%;
             background: var(--primary);
             color: var(--white);
             text-align: center;
@@ -465,79 +640,93 @@
 
         .work-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            margin-top: 60px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 18px;
+            margin-top: 55px;
         }
 
         .work-item {
-            height: 400px;
+            height: 360px;
             background-size: cover;
             background-position: center;
             position: relative;
             overflow: hidden;
             cursor: pointer;
+            border-radius: 4px;
         }
 
         .work-overlay {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            inset: 0;
             background: rgba(10, 25, 47, 0.9);
             display: flex;
             flex-direction: column;
             justify-content: center;
+            align-items: center;
             opacity: 0;
             transition: var(--transition);
+            padding: 20px;
+        }
+
+        .work-overlay h3 {
+            font-size: 1.5rem;
+            color: var(--white);
+            margin-bottom: 8px;
+        }
+
+        .work-overlay p {
+            color: var(--secondary);
+            font-size: 0.9rem;
         }
 
         .work-item:hover .work-overlay {
             opacity: 1;
         }
 
-        /* --- Footer --- */
+        /* ========================
+           FOOTER
+        ======================== */
         footer {
             background: var(--primary);
             color: var(--white);
-            padding: 150px 10% 50px;
+            padding: 100px 8% 50px;
             border-top: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         .footer-main {
             display: grid;
             grid-template-columns: 2fr 1fr 1.5fr;
-            gap: 100px;
-            margin-bottom: 100px;
+            gap: 70px;
+            margin-bottom: 80px;
         }
 
         .footer-logo .logo-text {
-            font-size: 2.2rem;
-            margin-bottom: 25px;
+            font-size: 2rem;
+            margin-bottom: 20px;
         }
 
         .footer-logo .logo-text span {
-            font-size: 1.3rem;
-            letter-spacing: 12px;
+            font-size: 1.1rem;
+            letter-spacing: 10px;
         }
 
         .footer-logo p {
             color: var(--text-sub);
-            max-width: 400px;
-            margin-bottom: 40px;
+            max-width: 380px;
+            margin-bottom: 35px;
+            line-height: 1.7;
         }
 
         .footer-socials {
             display: flex;
-            gap: 20px;
+            gap: 15px;
         }
 
         .instagram-premium {
             display: inline-flex;
             align-items: center;
-            gap: 15px;
-            padding: 12px 25px;
+            gap: 12px;
+            padding: 12px 22px;
             background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
             border-radius: 8px;
             color: var(--white) !important;
@@ -546,133 +735,355 @@
             position: relative;
             transition: var(--transition);
             border: none !important;
-            width: auto !important;
-            height: auto !important;
         }
 
         .instagram-premium i {
-            font-size: 1.6rem;
+            font-size: 1.4rem;
             color: var(--white) !important;
         }
 
         .instagram-premium span {
             font-weight: 700;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             letter-spacing: 1px;
             text-transform: uppercase;
         }
 
         .instagram-premium:hover {
-            transform: translateY(-5px) scale(1.05);
+            transform: translateY(-4px) scale(1.04);
             box-shadow: 0 10px 25px rgba(220, 39, 67, 0.4);
             filter: brightness(1.1);
         }
 
+        .footer-links h5,
         .footer-contact h5 {
-            font-size: 1.1rem;
+            font-size: 1rem;
             color: var(--secondary);
             text-transform: uppercase;
             letter-spacing: 3px;
-            margin-bottom: 40px;
+            margin-bottom: 30px;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links ul li {
+            margin-bottom: 14px;
+        }
+
+        .footer-links ul li a {
+            color: var(--text-sub);
+            text-decoration: none;
+            transition: 0.3s;
+            font-size: 0.95rem;
+        }
+
+        .footer-links ul li a:hover {
+            color: var(--secondary);
+            padding-left: 6px;
         }
 
         .contact-unit {
             display: flex;
-            gap: 20px;
-            margin-bottom: 35px;
+            gap: 16px;
+            margin-bottom: 28px;
+            align-items: flex-start;
         }
 
         .contact-unit i {
             color: var(--secondary);
-            font-size: 1.4rem;
-            padding-top: 5px;
+            font-size: 1.2rem;
+            padding-top: 4px;
+            flex-shrink: 0;
         }
 
         .contact-unit h6 {
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             color: var(--text-sub);
-            margin-bottom: 5px;
+            margin-bottom: 4px;
         }
 
         .contact-unit a {
             color: var(--white);
             text-decoration: none;
             transition: var(--transition);
+            font-size: 0.95rem;
         }
 
         .contact-unit a:hover {
             color: var(--secondary);
-            padding-left: 5px;
         }
 
         .copyright {
             text-align: center;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-            padding-top: 50px;
-            font-size: 0.9rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            padding-top: 40px;
+            font-size: 0.85rem;
             color: var(--text-sub);
         }
 
         /* --- Floating WhatsApp --- */
         .wa-float {
             position: fixed;
-            bottom: 40px;
-            right: 40px;
-            width: 75px;
-            height: 75px;
+            bottom: 28px;
+            right: 28px;
+            width: 65px;
+            height: 65px;
             background: #25d366;
             color: white;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2.5rem;
+            font-size: 2.2rem;
             z-index: 999;
-            box-shadow: 0 15px 35px rgba(37, 211, 102, 0.4);
+            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4);
             transition: var(--transition);
             text-decoration: none;
         }
 
         .wa-float:hover {
-            transform: scale(1.1) rotate(15deg);
+            transform: scale(1.12) rotate(12deg);
         }
 
-        /* --- Mobile --- */
+        /* ========================
+           RESPONSIVE — TABLET (≤1024px)
+        ======================== */
         @media (max-width: 1024px) {
-            .footer-main {
-                grid-template-columns: 1fr 1fr;
-            }
-
-            .about {
-                flex-direction: column;
-                gap: 60px;
-                text-align: center;
-            }
-
-            .about-image img {
-                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-            }
-
             header {
                 padding: 20px 5%;
+            }
+
+            header.scrolled {
+                padding: 14px 5%;
             }
 
             nav {
                 display: none;
             }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .mobile-nav {
+                display: flex;
+            }
+
+            .about {
+                flex-direction: column;
+                gap: 70px;
+                text-align: center;
+                padding: 90px 8%;
+            }
+
+            .about-image img {
+                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            }
+
+            .experience-badge {
+                right: -15px;
+                bottom: -20px;
+                padding: 22px;
+            }
+
+            .about-badges {
+                justify-content: center;
+            }
+
+            .footer-main {
+                grid-template-columns: 1fr 1fr;
+                gap: 50px;
+            }
+
+            .footer-logo {
+                grid-column: 1 / -1;
+            }
         }
 
+        /* ========================
+           RESPONSIVE — MOBILE (≤768px)
+        ======================== */
         @media (max-width: 768px) {
-            .footer-main {
-                grid-template-columns: 1fr;
+            .hero {
+                padding: 100px 6% 70px;
+                min-height: 100svh;
+            }
+
+            .hero-eyebrow {
+                font-size: 0.75rem;
+                letter-spacing: 3px;
             }
 
             .hero h1 {
-                font-size: 3.5rem;
+                font-size: clamp(2.1rem, 8vw, 3rem);
+                letter-spacing: -0.5px;
+            }
+
+            .hero p {
+                font-size: 0.95rem;
+            }
+
+            .cta-group {
+                flex-direction: column;
+                gap: 14px;
+            }
+
+            .btn-premium {
+                padding: 16px 28px;
+                font-size: 0.8rem;
+                justify-content: center;
+                width: 100%;
+                max-width: 320px;
             }
 
             .stats-strip {
                 grid-template-columns: 1fr 1fr;
+                padding: 40px 6%;
+                gap: 25px;
+            }
+
+            .stat-card {
+                border-right: none;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+                padding-bottom: 20px;
+            }
+
+            .stat-card:nth-child(even) {
+                border-right: none;
+            }
+
+            .stat-card:nth-last-child(-n+2) {
+                border-bottom: none;
+            }
+
+            .services {
+                padding: 80px 6%;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .service-item {
+                padding: 48px 30px;
+            }
+
+            .service-item:hover {
+                transform: none;
+            }
+
+            .about {
+                padding: 80px 6%;
+                gap: 55px;
+            }
+
+            .about-image img {
+                box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
+            }
+
+            .experience-badge {
+                position: relative;
+                right: auto;
+                bottom: auto;
+                display: inline-block;
+                margin-top: 20px;
+                padding: 20px 28px;
+            }
+
+            .portfolio {
+                padding: 70px 5%;
+            }
+
+            .work-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+
+            .work-item {
+                height: 280px;
+            }
+
+            .work-overlay {
+                opacity: 1;
+                background: rgba(10, 25, 47, 0.75);
+            }
+
+            footer {
+                padding: 70px 6% 40px;
+            }
+
+            .footer-main {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                margin-bottom: 50px;
+            }
+
+            .footer-logo {
+                grid-column: auto;
+            }
+
+            .footer-logo p {
+                max-width: 100%;
+            }
+
+            .wa-float {
+                width: 58px;
+                height: 58px;
+                font-size: 1.9rem;
+                bottom: 20px;
+                right: 20px;
+            }
+
+            .section-tag {
+                margin-bottom: 45px;
+            }
+        }
+
+        /* ========================
+           RESPONSIVE — SMALL MOBILE (≤480px)
+        ======================== */
+        @media (max-width: 480px) {
+            .logo-img {
+                height: 38px;
+            }
+
+            .logo-text {
+                font-size: 1.1rem;
+                letter-spacing: 3px;
+            }
+
+            .logo-text span {
+                font-size: 0.65rem;
+                letter-spacing: 5px;
+            }
+
+            .hero h1 {
+                font-size: clamp(1.9rem, 9vw, 2.5rem);
+            }
+
+            .stats-strip {
+                grid-template-columns: 1fr 1fr;
+                padding: 32px 5%;
+            }
+
+            .stat-card h3 {
+                font-size: 1.9rem;
+            }
+
+            .stat-card p {
+                font-size: 0.65rem;
+                letter-spacing: 2px;
+            }
+
+            .service-item {
+                padding: 40px 24px;
+            }
+
+            .section-tag h2 {
+                font-size: 1.8rem;
             }
         }
     </style>
@@ -680,10 +1091,31 @@
 
 <body>
 
-    <a href="https://wa.me/905364481906" class="wa-float" target="_blank">
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/905364481906" class="wa-float" target="_blank" aria-label="WhatsApp ile İletişim">
         <i class="fab fa-whatsapp"></i>
     </a>
 
+    <!-- Mobile Nav Overlay -->
+    <div class="nav-overlay" id="navOverlay"></div>
+
+    <!-- Mobile Nav Drawer -->
+    <nav class="mobile-nav" id="mobileNav">
+        <ul>
+            <li><a href="#home" class="mobile-nav-link">Giriş</a></li>
+            <li><a href="#services" class="mobile-nav-link">Uzmanlık</a></li>
+            <li><a href="#about" class="mobile-nav-link">Kurumsal</a></li>
+            <li><a href="#contact" class="mobile-nav-link">İletişim</a></li>
+        </ul>
+        <div class="mobile-nav-cta">
+            <a href="https://wa.me/905364481906" target="_blank">
+                <i class="fab fa-whatsapp"></i>
+                Teklif Alın
+            </a>
+        </div>
+    </nav>
+
+    <!-- Header -->
     <header id="main-header">
         <a href="#home" class="logo-container">
             <img src="pnglogo.png" alt="Burak Yapı Logo" class="logo-img">
@@ -697,23 +1129,30 @@
                 <li><a href="#contact">İletişim</a></li>
             </ul>
         </nav>
+        <button class="hamburger" id="hamburger" aria-label="Menü Aç/Kapat">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
     </header>
 
+    <!-- Hero Section -->
     <section id="home" class="hero">
         <div class="hero-content" data-aos="fade-right">
-            <span>Prestij & Güvenin Mimarı</span>
+            <span class="hero-eyebrow">Prestij & Güvenin Mimarı</span>
             <h1>Hayalleri Gerçeğe Dönüştürüyoruz</h1>
-            <p>Burak Yapı & İnşaat, modern mühendislik çözümleri ve estetik tasarım anlayışıyla yaşam alanlarınıza değer
-                katar. Geleceği bugünden sağlam temeller üzerine inşa ediyoruz.</p>
+            <p>Burak Yapı & İnşaat, modern mühendislik çözümleri ve estetik tasarım anlayışıyla yaşam alanlarınıza
+                değer katar. Geleceği bugünden sağlam temeller üzerine inşa ediyoruz.</p>
             <div class="cta-group">
                 <a href="https://wa.me/905364481906" class="btn-premium btn-gold" target="_blank">
                     <i class="fab fa-whatsapp"></i> Teklif Alın
                 </a>
-                <a href="#services" class="btn-premium btn-white btn-outline">Neler Yapıyoruz?</a>
+                <a href="#services" class="btn-premium btn-outline">Neler Yapıyoruz?</a>
             </div>
         </div>
     </section>
 
+    <!-- Stats Strip -->
     <section class="stats-strip">
         <div class="stat-card" data-aos="fade-up">
             <h3>450+</h3>
@@ -733,6 +1172,7 @@
         </div>
     </section>
 
+    <!-- Services Section -->
     <section id="services" class="services">
         <div class="section-tag" data-aos="fade-up">
             <p>Uzmanlık Alanlarımız</p>
@@ -760,39 +1200,39 @@
         </div>
     </section>
 
+    <!-- About Section -->
     <section id="about" class="about">
         <div class="about-image" data-aos="fade-right">
             <img src="background.png" alt="Burak Yapı Projeleri">
             <div class="experience-badge">
-                <span style="font-size: 3.5rem; font-weight: 800; color: var(--secondary);">2026</span>
-                <p style="letter-spacing: 2px;">VİZYONUMUZ</p>
+                <span style="font-size: 2.8rem; font-weight: 800; color: var(--secondary); display: block;">2026</span>
+                <p style="letter-spacing: 2px; font-size: 0.8rem;">VİZYONUMUZ</p>
             </div>
         </div>
         <div class="about-content" data-aos="fade-left">
-            <h2 style="color: var(--primary);">Kalite Bizim İçin Bir Tercih Değil, Bir Zorunluluktur.</h2>
+            <h2>Kalite Bizim İçin Bir Tercih Değil, Bir Zorunluluktur.</h2>
             <p>Hüsamettin ve Burak Çırakoğlu liderliğinde, inşaat sektöründe güvenin sembolü haline geldik. Her
                 projemizde en küçük detaya kadar mükemmelliği hedefliyoruz.</p>
             <p>Dürüstlük, kalite ve zamanında teslimat ilkelerimizden ödün vermeden, Türkiye'nin yapı sektöründeki
                 standartlarını yukarı taşımaya devam ediyoruz.</p>
-            <div style="display: flex; gap: 30px; margin-top: 40px;">
-                <div style="text-align: center;">
-                    <i class="fas fa-shield-alt"
-                        style="font-size: 2.5rem; color: var(--secondary); margin-bottom: 10px;"></i>
-                    <h6 style="font-weight: 800;">Güvenlik</h6>
+            <div class="about-badges">
+                <div class="about-badge-item">
+                    <i class="fas fa-shield-alt"></i>
+                    <h6>Güvenlik</h6>
                 </div>
-                <div style="text-align: center;">
-                    <i class="fas fa-gem" style="font-size: 2.5rem; color: var(--secondary); margin-bottom: 10px;"></i>
-                    <h6 style="font-weight: 800;">Kalite</h6>
+                <div class="about-badge-item">
+                    <i class="fas fa-gem"></i>
+                    <h6>Kalite</h6>
                 </div>
-                <div style="text-align: center;">
-                    <i class="fas fa-clock"
-                        style="font-size: 2.5rem; color: var(--secondary); margin-bottom: 10px;"></i>
-                    <h6 style="font-weight: 800;">Dakiklik</h6>
+                <div class="about-badge-item">
+                    <i class="fas fa-clock"></i>
+                    <h6>Dakiklik</h6>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- Portfolio Section -->
     <section class="portfolio">
         <div class="section-tag" data-aos="fade-up">
             <p style="color: var(--secondary);">Öne Çıkan Çalışmalar</p>
@@ -824,6 +1264,7 @@
         </div>
     </section>
 
+    <!-- Footer -->
     <footer id="contact">
         <div class="footer-main">
             <div class="footer-logo">
@@ -831,8 +1272,7 @@
                 <p>Türkiye'nin her noktasında yaşanabilir, güvenli ve modern alanlar inşa ediyoruz. Kalite ve güvenin
                     adresi.</p>
                 <div class="footer-socials">
-                    <a href="https://www.instagram.com/burakyapi_insaat" class="social-btn instagram-premium"
-                        target="_blank">
+                    <a href="https://www.instagram.com/burakyapi_insaat" class="instagram-premium" target="_blank">
                         <i class="fab fa-instagram"></i>
                         <span>Bizi Takip Edin</span>
                     </a>
@@ -840,22 +1280,11 @@
             </div>
 
             <div class="footer-links">
-                <h5
-                    style="color: var(--secondary); letter-spacing: 3px; margin-bottom: 30px; font-size: 1.1rem; text-transform: uppercase;">
-                    Bağlantılar</h5>
-                <ul style="list-style: none;">
-                    <li style="margin-bottom: 15px;"><a href="#home"
-                            style="color: var(--text-sub); text-decoration: none; transition: 0.3s;"
-                            onmouseover="this.style.color='#ffb400'" onmouseout="this.style.color='#8892b0'">Giriş
-                            Sayfası</a></li>
-                    <li style="margin-bottom: 15px;"><a href="#services"
-                            style="color: var(--text-sub); text-decoration: none; transition: 0.3s;"
-                            onmouseover="this.style.color='#ffb400'"
-                            onmouseout="this.style.color='#8892b0'">Hizmetlerimiz</a></li>
-                    <li style="margin-bottom: 15px;"><a href="#about"
-                            style="color: var(--text-sub); text-decoration: none; transition: 0.3s;"
-                            onmouseover="this.style.color='#ffb400'"
-                            onmouseout="this.style.color='#8892b0'">Kurumsal</a></li>
+                <h5>Bağlantılar</h5>
+                <ul>
+                    <li><a href="#home">Giriş Sayfası</a></li>
+                    <li><a href="#services">Hizmetlerimiz</a></li>
+                    <li><a href="#about">Kurumsal</a></li>
                 </ul>
             </div>
 
@@ -892,21 +1321,50 @@
     <!-- Animations & Logic -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
     <script>
-        // Init AOS
+        // Init AOS — daha hafif mobil için
         AOS.init({
-            duration: 1000,
+            duration: 800,
             once: true,
-            offset: 100
+            offset: 60,
+            disable: window.innerWidth < 480 ? 'mobile' : false
         });
 
         // Header Scroll Effect
+        const header = document.getElementById('main-header');
         window.addEventListener('scroll', () => {
-            const header = document.getElementById('main-header');
-            if (window.scrollY > 100) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
+            header.classList.toggle('scrolled', window.scrollY > 80);
+        });
+
+        // Hamburger / Mobile Nav
+        const hamburger = document.getElementById('hamburger');
+        const mobileNav = document.getElementById('mobileNav');
+        const navOverlay = document.getElementById('navOverlay');
+
+        function openMenu() {
+            hamburger.classList.add('open');
+            mobileNav.classList.add('open');
+            navOverlay.classList.add('open');
+            navOverlay.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeMenu() {
+            hamburger.classList.remove('open');
+            mobileNav.classList.remove('open');
+            navOverlay.classList.remove('open');
+            setTimeout(() => { navOverlay.style.display = 'none'; }, 400);
+            document.body.style.overflow = '';
+        }
+
+        hamburger.addEventListener('click', () => {
+            mobileNav.classList.contains('open') ? closeMenu() : openMenu();
+        });
+
+        navOverlay.addEventListener('click', closeMenu);
+
+        // Nav link click closes menu
+        document.querySelectorAll('.mobile-nav-link').forEach(link => {
+            link.addEventListener('click', closeMenu);
         });
     </script>
 </body>
