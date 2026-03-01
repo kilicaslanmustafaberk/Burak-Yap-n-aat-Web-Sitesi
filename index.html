@@ -1974,39 +1974,52 @@
         }
       });
 
-      // WhatsApp Yönlendirme
+      // ==========================================
+      // MOBİL UYUMLU WHATSAPP YÖNLENDİRME (KESİN ÇÖZÜM)
+      // ==========================================
       document
         .getElementById("quoteForm")
         .addEventListener("submit", function (e) {
           e.preventDefault();
 
+          // Form verilerini alıyoruz
           const name = document.getElementById("name").value;
           const phone = document.getElementById("phone").value;
           const service = document.getElementById("service").value;
           const message = document.getElementById("message").value;
 
+          // WhatsApp mesaj taslağı
           const whatsappMessage = `Merhaba Burak Yapı, web sitenizden yeni bir teklif talebi var:\n\n👤 *İsim:* ${name}\n📱 *Telefon:* ${phone}\n🏢 *İlgilenilen Hizmet:* ${service}\n📝 *Proje Detayı:* ${message}`;
           const encodedMessage = encodeURIComponent(whatsappMessage);
-          const whatsappURL = `https://wa.me/905364481906?text=${encodedMessage}`;
 
+          // Mobil cihazlar için en kararlı URL yapısı
+          const whatsappURL = `https://api.whatsapp.com/send?phone=905364481906&text=${encodedMessage}`;
+
+          // Buton üzerinde geri bildirim veriyoruz
           const btn = this.querySelector('button[type="submit"]');
           const originalText = btn.innerHTML;
 
           btn.innerHTML =
-            '<i class="fab fa-whatsapp"></i> WhatsApp\'a Yönlendiriliyor...';
+            '<i class="fas fa-circle-notch fa-spin"></i> WhatsApp Açılıyor...';
           btn.style.background = "#25d366";
           btn.style.color = "#fff";
 
+          // Kısa bir gecikmeden sonra yönlendirme yapıyoruz
           setTimeout(() => {
-            window.open(whatsappURL, "_blank");
+            // window.open yerine window.location.href kullanımı mobil engelleri aşar
+            window.location.href = whatsappURL;
 
-            modal.classList.remove("active");
-            document.body.style.overflow = "";
+            // Modalın kapatılması ve formun temizlenmesi
+            const modal = document.getElementById("contactModal");
+            if (modal) {
+              modal.classList.remove("active");
+              document.body.style.overflow = "";
+            }
             this.reset();
             btn.innerHTML = originalText;
             btn.style.background = "";
             btn.style.color = "";
-          }, 1000);
+          }, 500);
         });
     </script>
   </body>
